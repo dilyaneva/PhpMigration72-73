@@ -1,0 +1,98 @@
+Migrating from PHP 7.2.x to PHP 7.3.x
+http://anastasionico.uk/blog/php-73
+https://anastasionico.uk/blog/php-7-3-new-features
+https://anastasionico.uk/blog/php-7-3-deprecations-changes
+
+есенция:
+https://hackernoon.com/deprecations-and-changes-for-php-7-3-avoid-errors-7a5c4dbeaa8b
+
+prce->prce2
+https://tracker.moodle.org/browse/MDL-65479
+
+https://php.vn.ua/manual/ro/migration73.incompatible.php
+
+https://zamunda.net/banan?id=327846&comments=1#startcomments
+
+
+https://www.php.net/manual/en/migration73.php
+
+deprecated
+image2wbmp става -> imagewbmp
+filter_var() 
+-FILTER_FLAG_SCHEME_REQUIRED 
+-FILTER_FLAG_HOST_REQUIRED 
+The previous code will throw “Deprecated: define(): Declaration of case-insensitive constants is deprecated”,
+Perl Compatible Regular Expressions, also called PCRE is a library that PHP uses for dealing with Regular Expressions.PCRE to PCRE2 
+PSRE2 is more strict in the pattern validations, so after the upgrade, some of your existing patterns could not compile anymore.
+this probably is one of the most common causes of incompatibility you will encounter.
+
+
+bcscale() can now also be used as getter to retrieve the current scale in use. Returns the old scale when used as setter. Otherwise the current scale is returned.
+
+Support for full case-mapping and case-folding has been added.
+mb_strtoupper("Straße");
+// Produces STRAßE on PHP 7.2
+// Produces STRASSE on PHP 7.3
+mb_convert_case ( string $str , int $mode [, string $encoding = mb_internal_encoding() ] ) : string
+mode
+The mode of the conversion. It can be one of MB_CASE_UPPER, MB_CASE_LOWER, 
+MB_CASE_TITLE, MB_CASE_FOLD, MB_CASE_UPPER_SIMPLE, MB_CASE_LOWER_SIMPLE, MB_CASE_TITLE_SIMPLE, MB_CASE_FOLD_SIMPLE.
+
+Multibyte String Functions
+https://www.php.net/manual/en/ref.mbstring.php
+mb_parse_str($str, $result);
+print_r($result);
+
+//结果
+Array
+(
+    [email] => kehaovista@qq.com
+    [city] => shanghai
+    [job] => Phper
+)
+https://www.php.net/manual/en/migration73.new-features.php
+
+array_key_first — Gets the first key of an array
+array_key_last — Gets the last key of an array
+gc_status — Gets information about the garbage collector
+hrtime — Get the system's high resolution time
+is_countable — Verify that the contents of a variable is a countable value
+
+PostgreSQL
+PGSQL_DIAG_SCHEMA_NAME
+PGSQL_DIAG_TABLE_NAME
+PGSQL_DIAG_COLUMN_NAME
+PGSQL_DIAG_DATATYPE_NAME
+PGSQL_DIAG_CONSTRAINT_NAME
+PGSQL_DIAG_SEVERITY_NONLOCALIZED
+
+<?php
+while ($foo) {
+    switch ($bar) {
+      case "baz":
+         continue;
+         // Warning: "continue" targeting switch is equivalent to
+         //          "break". Did you mean to use "continue 2"?
+   }
+}
+?>
+In PHP, static properties are shared between inheriting classes, unless the static property is explicitly overridden in a child class.
+TypeError now reports wrong types as int and bool instead of integer and boolean, respectively.
+
+$city  = "San Francisco";
+$state = "CA";
+$event = "SIGGRAPH";
+
+$location_vars = array("city", "state");
+
+$result = compact("event", $location_vars);
+print_r($result);
+
+getimagesize() and related functions now report the mime type of BMP images as image/bmp instead of image/x-ms-bmp
+stream_socket_get_name() will now return IPv6 addresses wrapped in brackets. For example "[::1]:1337" will be returned instead of "::1:1337".
+
+Standard PHP Library (SPL)
+If an SPL autoloader throws an exception, following autoloaders will not be executed. Previously all autoloaders were executed and exceptions were chained.
+
+SimpleXML
+Mathematic operations involving SimpleXML objects will now treat the text as an integer or float, whichever is more appropriate. Previously values were treated as integers unconditionally.
